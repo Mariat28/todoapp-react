@@ -1,13 +1,16 @@
 import Card from "../ui/Card";
+import TaskListItem from "./TaskListItem";
 const TaskList = () => {
   return(
-    <div>
-      <Card className="h-28 max-h-28 border-t ">
-        <div className="flex justify-between">
-          <div className="rounded-md shadow-xl bg-red-500 w-fit h-full font-bold flex items-center">
-              CP
-          </div>
-        </div>
+    <div className="h-full flex flex-col gap-3">
+      <Card className="h-28 max-h-28  hover:shadow-xl ">
+        <TaskListItem/>
+      </Card>
+      <Card className="h-28 max-h-28  hover:shadow-xl ">
+        <TaskListItem/>
+      </Card>
+      <Card className="h-28 max-h-28  hover:shadow-xl ">
+        <TaskListItem/>
       </Card>
     </div>
   )
