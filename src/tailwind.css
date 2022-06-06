@@ -1,0 +1,3 @@
+input:focus-within ~ label, input:not(:placeholder-shown) ~ label  {
+  @apply transform scale-75 -translate-y-2 text-purple-500;
+ }

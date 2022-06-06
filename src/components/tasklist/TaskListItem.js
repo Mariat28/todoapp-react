@@ -6,7 +6,7 @@ const TaskListItem = () => {
            <TaskAvatar/> 
             <div className="flex items-center justify-between w-full">
                 <div className="flex flex-col p-1 py-2">
-                    <span>Task Title</span>
+                    <span className="text-lg">Task Title</span>
                     <span className="text-sm font-normal">Task Description</span>
                     <span className="text-sm font-normal">25th May 2022</span>
                 </div>
