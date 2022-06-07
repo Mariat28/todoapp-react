@@ -1,17 +1,19 @@
 import Card from "../ui/Card";
 import TaskListItem from "./TaskListItem";
-const TaskList = () => {
+const TaskList = (props) => {
+  const tasks = [...props.tasks];
   return(
     <div className="h-full flex flex-col gap-3">
-      <Card className="h-28 max-h-28  hover:shadow-xl ">
-        <TaskListItem/>
+      {tasks.map((task, index) => 
+      <Card className="h-28 max-h-28  hover:shadow-xl " key={index}>
+        <TaskListItem key={index}
+        title={task.title}
+        description={task.description}
+        date={task.date}
+        />
       </Card>
-      <Card className="h-28 max-h-28  hover:shadow-xl ">
-        <TaskListItem/>
-      </Card>
-      <Card className="h-28 max-h-28  hover:shadow-xl ">
-        <TaskListItem/>
-      </Card>
+      )}
+
     </div>
   )
 }

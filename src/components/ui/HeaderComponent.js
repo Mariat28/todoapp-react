@@ -4,7 +4,6 @@ import Button from './Button';
 
 const HeaderComponent =(props)=>{
     const AddFormHandler = () => {
-      console.log('show add task form clicked');
         props.onAddFormButtonClick(true);
     }
     return(

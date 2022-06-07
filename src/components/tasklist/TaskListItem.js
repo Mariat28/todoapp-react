@@ -1,14 +1,14 @@
 import TaskAvatar from "./TaskAvatar";
 import {AiFillEdit, AiFillDelete} from 'react-icons/ai';
-const TaskListItem = () => {
+const TaskListItem = (props) => {
     return(
         <div className="h-full flex w-full">
-           <TaskAvatar/> 
+           <TaskAvatar title={props.title.split(' ')}/> 
             <div className="flex items-center justify-between w-full">
                 <div className="flex flex-col p-1 py-2">
-                    <span className="text-lg">Task Title</span>
-                    <span className="text-sm font-normal">Task Description</span>
-                    <span className="text-sm font-normal">25th May 2022</span>
+                    <span className="text-lg capitalize">{props.title}</span>
+                    <span className="text-sm font-normal normal-case">{props.description}</span>
+                    <span className="text-sm font-normal">{props.date}</span>
                 </div>
                 <div className="flex p-2 gap-3 text-2xl">
                     <AiFillEdit className="text-purple-500 "/>
