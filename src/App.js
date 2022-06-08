@@ -8,9 +8,13 @@ import "./App.css";
 function App() {
   const [isAddFormOpen, setIsAddFormOpen] = useState(false);
   const [tasks, setTasks] = useState([]);
+  const [searchParam, setSearchParam] = useState('');
   const showFormHandler = (value) => {
     setIsAddFormOpen(value);
   };
+  const searchFilterHandler = (value) => {
+    setSearchParam(value);
+} 
   const saveTaskHandler = (task) => {
     setTasks((previousTasks) => {
       return [...previousTasks, task];
@@ -24,11 +28,11 @@ function App() {
           onSaveTask={saveTaskHandler}
         />
       )}
-      <div className="text-xl h-full font-bold flex flex-col gap-2 container mx-auto rounded-xl shadow-2xl p-3">
-        <HeaderComponent
-          onAddFormButtonClick={showFormHandler}
+      <div className="text-xl h-full font-bold flex flex-col gap-2 container mx-auto rounded-xl shadow-2xl py-3">
+        <HeaderComponent onSearchFilter={searchFilterHandler}
+          onAddFormButtonClick={showFormHandler} 
         ></HeaderComponent>
-        {tasks.length > 0 && <TaskList tasks={tasks}></TaskList>}
+        {tasks.length > 0 && <TaskList tasks={tasks} searchParam = {searchParam}></TaskList>}
         {tasks.length === 0 && (
           <div className="w-full h-full  flex flex-col justify-top mt-16 items-center gap-0">
             <div className="h-36 w-52  ">

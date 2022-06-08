@@ -1,6 +1,9 @@
 import TaskAvatar from "./TaskAvatar";
 import {AiFillEdit, AiFillDelete} from 'react-icons/ai';
 const TaskListItem = (props) => {
+    const deleteClickHandler = () =>{
+        props.onDeleteItem(props.index);
+    }
     return(
         <div className="h-full flex w-full">
            <TaskAvatar title={props.title.split(' ')}/> 
@@ -12,7 +15,7 @@ const TaskListItem = (props) => {
                 </div>
                 <div className="flex p-2 gap-3 text-2xl">
                     <AiFillEdit className="text-purple-500 "/>
-                    <AiFillDelete className="text-slate-400"/>
+                    <AiFillDelete className="text-slate-400" onClick={deleteClickHandler}/>
                 </div>
             </div>
         </div>
