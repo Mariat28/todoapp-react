@@ -15,7 +15,7 @@ const TaskListItem = (props) => {
                 </div>
                 <div className="flex p-2 gap-3 text-2xl">
                     <AiFillEdit className="text-purple-500 "/>
-                    <AiFillDelete className="text-slate-400" onClick={deleteClickHandler}/>
+                    <AiFillDelete className="text-slate-400 cursor-pointer" onClick={deleteClickHandler}/>
                 </div>
             </div>
         </div>

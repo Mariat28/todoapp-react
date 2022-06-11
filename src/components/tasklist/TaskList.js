@@ -9,6 +9,7 @@ const TaskList = (props) => {
     filteredTasks = tasks;
   }
   const DeleteItemHandler=(index)=>{
+    props.onDeleteTask(index);
     console.log('delete item',index);
   }
   return(

@@ -20,6 +20,13 @@ function App() {
       return [...previousTasks, task];
     });
   };
+  const deleteTaskHandler =(taskIndex)=>{
+    setTasks((previousTasks) =>{
+      const updatedTasks = previousTasks.filter((task,index) => index !== taskIndex );
+        return updatedTasks;
+    });
+
+  }
   return (
     <div className="h-screen min-h-screen">
       {isAddFormOpen && (
@@ -32,7 +39,7 @@ function App() {
         <HeaderComponent onSearchFilter={searchFilterHandler}
           onAddFormButtonClick={showFormHandler} 
         ></HeaderComponent>
-        {tasks.length > 0 && <TaskList tasks={tasks} searchParam = {searchParam}></TaskList>}
+        {tasks.length > 0 && <TaskList tasks={tasks} searchParam = {searchParam} onDeleteTask={deleteTaskHandler}></TaskList>}
         {tasks.length === 0 && (
           <div className="w-full h-full  flex flex-col justify-top mt-16 items-center gap-0">
             <div className="h-36 w-52  ">

@@ -15,7 +15,7 @@ const HeaderComponent =(props)=>{
         <div className='flex justify-center '>Todo App</div>
         <div className='flex gap-2 items-center'>
             <SearchComponent onSearchItemChange={searchItemChangeHandler}/>
-            <Button title= 'Add Task' icon= {<IoAdd/>} type='button' onButtonClick={AddFormHandler}></Button>
+            <Button title= 'Add Task' icon= {<IoAdd/>} type='button' onClick={AddFormHandler}>Add Task</Button>
         </div>
     </div>
     )
