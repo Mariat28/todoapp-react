@@ -123,7 +123,7 @@ const AddTask = (props) => {
             <div className="absolute inset-x-0 bottom-0 flex items-center justify-between h-12 bg-purple-200 w-full p-2">
               <button
                 type="button"
-                className="w-20 flex rounded-lg uppercase justify-center text-purple-500 text-sm p-2 hover:bg-pink-400 hover:text-white bg-white"
+                className="w-20 flex rounded-lg uppercase justify-center text-purple-500 text-sm p-2 hover:bg-pink-300 hover:text-white bg-white"
                 onClick={closeButtonClickHandler}
               >
                 cancel

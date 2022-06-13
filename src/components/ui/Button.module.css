@@ -1,0 +1,19 @@
+.button{
+  display: flex;
+  align-items: center;
+  padding: 4px;
+  color: #52159d;
+  background-color: #dface9;
+  border-radius: 8px;
+  font-size: small;
+  text-transform: uppercase;
+}
+.button:hover{
+  color:#dface9;
+  background-color: #52159d;
+}
+/* @media(min-width: 768px) {
+  .button{
+    width: auto;
+  }
+} */
