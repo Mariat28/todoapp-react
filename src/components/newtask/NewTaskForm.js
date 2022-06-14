@@ -1,8 +1,9 @@
-import { useState } from "react";
+import ReactDOM from 'react-dom';
+import React, { useState } from "react";
 import { BsListTask } from "react-icons/bs";
 import { TbFileDescription } from "react-icons/tb";
 
-const AddTask = (props) => {
+const NewTaskForm = (props) => {
   const [taskTitle, setTaskTitle] = useState("");
   const [taskDate, setTaskDate] = useState("");
   const [taskDescription, setTaskDescription] = useState("");
@@ -56,9 +57,15 @@ const AddTask = (props) => {
       props.onAddTask(task);
     }
   };
-  return (
-    <div className="absolute inset-0 flex justify-center items-center w-screen min-w-screen h-screen min-h-screen bg-black/40">
-      <div className="bg-purple-100 w-1/2 2xl:w-2/6 h-96 rounded-md relative shadow-lg">
+  const Backdrop = (props) =>{
+      return (
+        <div className="absolute inset-0 flex justify-center z-10 items-center w-full h-full  bg-black/40">
+        </div>
+      )
+  };
+  const ModalOverlay = (props) =>{
+    return (
+      <div className="bg-purple-100 z-20 w-1/2 m-auto 2xl:w-2/6 h-96 fixed inset-0 align-middle rounded-md  shadow-lg">
         <div className="rounded-md h-full shadow-lg ">
           <div className="w-full bg-purple-900 h-12 flex items-center justify-between p-2 text-slate-200 font-bold text-base">
             <h2>Add New Task</h2>
@@ -139,7 +146,14 @@ const AddTask = (props) => {
           </form>
         </div>
       </div>
-    </div>
+    )
+  };
+  return (
+    <React.Fragment>
+      {ReactDOM.createPortal(<Backdrop/>, document.getElementById('backdrop-root'))}
+      {ReactDOM.createPortal(<ModalOverlay />, document.getElementById('overlay-root'))}
+    </React.Fragment>
+
   );
 };
-export default AddTask;
+export default NewTaskForm;

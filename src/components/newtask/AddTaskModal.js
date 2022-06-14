@@ -1,4 +1,4 @@
-import AddTask from "./AddTask";
+import NewTaskForm from "./NewTaskForm";
 const TaskForm = (props) => {
   const closeFormHandler =(value)=>{
     props.onCloseFormClick(value);
@@ -9,8 +9,8 @@ const TaskForm = (props) => {
     props.onCloseFormClick(false);
   }
   return(
-    <div>
-      <AddTask onCloseButtonClick = {closeFormHandler} onAddTask = {AddTaskHandler}/>
+    <div className="">
+      <NewTaskForm onCloseButtonClick = {closeFormHandler} onAddTask = {AddTaskHandler}/>
     </div>
 
   )

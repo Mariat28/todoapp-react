@@ -1,6 +1,6 @@
 import HeaderComponent from "./components/ui/HeaderComponent";
 import TaskList from "./components/tasklist/TaskList";
-import TaskForm from "./components/newtask.js/TaskForm";
+import AddTaskModal from "./components/newtask/AddTaskModal";
 import noTasks from "./assets/images/noTasks.svg";
 import { useState } from "react";
 import "./App.css";
@@ -28,9 +28,9 @@ function App() {
 
   }
   return (
-    <div className="h-screen min-h-screen">
+    <div className="h-screen min-h-screen ">
       {isAddFormOpen && (
-        <TaskForm
+        <AddTaskModal
           onCloseFormClick={showFormHandler}
           onSaveTask={saveTaskHandler}
         />
