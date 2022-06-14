@@ -1,9 +1,13 @@
 import ReactDOM from 'react-dom';
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { BsListTask } from "react-icons/bs";
 import { TbFileDescription } from "react-icons/tb";
 
 const NewTaskForm = (props) => {
+  const titleInputRef = useRef();
+  const dateInputRef = useRef();
+  const descriptionInputRef = useRef();
+
   const [taskTitle, setTaskTitle] = useState("");
   const [taskDate, setTaskDate] = useState("");
   const [taskDescription, setTaskDescription] = useState("");
@@ -16,6 +20,7 @@ const NewTaskForm = (props) => {
     setTaskTitle(event.target.value);
     setTitleError("");
     setIsValid(true);
+    titleInputRef.current.focus();
   };
   const dateChangeHandler = (event) => {
     setTaskDate(event.target.value);
@@ -28,6 +33,10 @@ const NewTaskForm = (props) => {
   };
   const onSubmitHandler = (event) => {
     event.preventDefault();
+    console.log(titleInputRef);
+    const taskTitle = titleInputRef.current.value;
+    const taskDescription = descriptionInputRef.current.value
+    const taskDate = dateInputRef.current.value;
     if (taskTitle.trim().length === 0) {
       setIsValid(false);
       setTitleError("Task title is required!");
@@ -48,11 +57,8 @@ const NewTaskForm = (props) => {
         date: taskDate,
         description: taskDescription,
       };
-      setTaskTitle("");
       setTitleError("");
-      setTaskDescription("");
       setdescriptionError("");
-      setTaskDate("");
       setDateError("");
       props.onAddTask(task);
     }
@@ -82,11 +88,13 @@ const NewTaskForm = (props) => {
                     <input
                       type="text"
                       placeholder="Task title"
+                      id='title'
                       className=" bg-transparent w-full outline-none block appearance-none mt-2 "
                       value={taskTitle}
                       onChange={titleChangeHandler}
+                      ref= {titleInputRef}
                     />
-                    <label className="absolute top-0 -z-1 text-gray-100 -ml-2 mt-2 ">
+                    <label className="absolute top-0 -z-1 text-gray-100 -ml-2 mt-2 " htmlFor='title'>
                       Task title
                     </label>
                   </div>
@@ -98,12 +106,13 @@ const NewTaskForm = (props) => {
                   <div className=" bg-white p-3 shadow-md focus-within:border-purple-500 focus-within:border-b">
                     <input
                       type="date"
-                      placeholder=""
+                      id="date"
                       className=" bg-transparent mt-2 w-full outline-none block appearance-none "
                       value={taskDate}
                       onChange={dateChangeHandler}
+                      ref={dateInputRef}
                     />
-                    <label className="absolute top-0 -z-1  -ml-2 mt-2 ">
+                    <label className="absolute top-0 -z-1  -ml-2 mt-2 " htmlFor='date'>
                       Task date
                     </label>
                   </div>
@@ -121,6 +130,7 @@ const NewTaskForm = (props) => {
                   placeholder="Task description"
                   value={taskDescription}
                   onChange={descriptionChangeHandler}
+                  ref={descriptionInputRef}
                 ></textarea>
                 {descriptionError.length > 0 && (
                   <small className="text-red-500">{descriptionError}</small>
@@ -150,7 +160,7 @@ const NewTaskForm = (props) => {
   };
   return (
     <React.Fragment>
-      {ReactDOM.createPortal(<Backdrop/>, document.getElementById('backdrop-root'))}
+      {ReactDOM.createPortal(<Backdrop></Backdrop>, document.getElementById('backdrop-root'))}
       {ReactDOM.createPortal(<ModalOverlay />, document.getElementById('overlay-root'))}
     </React.Fragment>
 
