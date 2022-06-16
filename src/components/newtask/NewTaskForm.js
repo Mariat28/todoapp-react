@@ -20,7 +20,7 @@ const NewTaskForm = (props) => {
     setTaskTitle(event.target.value);
     setTitleError("");
     setIsValid(true);
-    titleInputRef.current.focus();
+    console.log(titleInputRef.current, titleInputRef)
   };
   const dateChangeHandler = (event) => {
     setTaskDate(event.target.value);
@@ -160,7 +160,7 @@ const NewTaskForm = (props) => {
   };
   return (
     <React.Fragment>
-      {ReactDOM.createPortal(<Backdrop></Backdrop>, document.getElementById('backdrop-root'))}
+      {ReactDOM.createPortal(<Backdrop/>, document.getElementById('backdrop-root'))}
       {ReactDOM.createPortal(<ModalOverlay />, document.getElementById('overlay-root'))}
     </React.Fragment>
 
