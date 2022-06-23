@@ -1,57 +1,34 @@
-import HeaderComponent from "./components/ui/HeaderComponent";
-import TaskList from "./components/tasklist/TaskList";
-import AddTaskModal from "./components/newtask/AddTaskModal";
-import noTasks from "./assets/images/noTasks.svg";
-import { useState } from "react";
+import LoginPage from './components/login/LoginPage';
+import HomePage from './components/HomePage';
+import { useState, useEffect } from "react";
 import "./App.css";
 
 function App() {
-  const [isAddFormOpen, setIsAddFormOpen] = useState(false);
-  const [tasks, setTasks] = useState([]);
-  const [searchParam, setSearchParam] = useState('');
-  const showFormHandler = (value) => {
-    setIsAddFormOpen(value);
-  };
-  const searchFilterHandler = (value) => {
-    setSearchParam(value);
-} 
-  const saveTaskHandler = (task) => {
-    setTasks((previousTasks) => {
-      return [...previousTasks, task];
-    });
-  };
-  const deleteTaskHandler =(taskIndex)=>{
-    setTasks((previousTasks) =>{
-      const updatedTasks = previousTasks.filter((task,index) => index !== taskIndex );
-        return updatedTasks;
-    });
+  const [ isLoggedIn, setIsLoggedIn] = useState(false);
 
+  const loginHandler = (uname, password) =>{
+    setIsLoggedIn(true);
+    sessionStorage.setItem('isLoggedIn', true);
+    sessionStorage.setItem('username', uname);
+
+    console.log('user details', uname, password);
+  }
+  useEffect(()=>{
+    const userLoggedIn = sessionStorage.getItem('isLoggedIn');
+    if(userLoggedIn) {
+      setIsLoggedIn(true);
+    console.log('effect hook');
+    }
+  }, []);
+  const logoutHandler =()=>{
+    setIsLoggedIn(false);
+    sessionStorage.removeItem('isLoggedIn');
+    sessionStorage.removeItem('username')
   }
   return (
-    <div className="h-screen min-h-screen ">
-      {isAddFormOpen && (
-        <AddTaskModal
-          onCloseFormClick={showFormHandler}
-          onSaveTask={saveTaskHandler}
-        />
-      )}
-      <div className="text-xl h-full font-bold flex flex-col gap-2 container mx-auto rounded-xl shadow-2xl py-3">
-        <HeaderComponent onSearchFilter={searchFilterHandler}
-          onAddFormButtonClick={showFormHandler} 
-        ></HeaderComponent>
-        {tasks.length > 0 && <TaskList tasks={tasks} searchParam = {searchParam} onDeleteTask={deleteTaskHandler}></TaskList>}
-        {tasks.length === 0 && (
-          <div className="w-full h-full  flex flex-col justify-top mt-16 items-center gap-0">
-            <div className="h-36 w-52  ">
-              <img src={noTasks} alt="no tasks avatar" />
-            </div>
-            <div className="text-base flex flex-col items-center  text-slate-400">
-              <span>Welcome to your task board!</span>
-              <span className="text-center">Let's get you started and more organized!</span>
-            </div>
-          </div>
-        )}
-      </div>
+    <div className="h-screen min-h-screen bg-purple-50">
+      {!isLoggedIn && <LoginPage onLogIn={loginHandler}/>}
+      {isLoggedIn && <HomePage onLogout={logoutHandler}/>}
     </div>
   );
 }
