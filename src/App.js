@@ -14,6 +14,10 @@ function App() {
     console.log('user details', uname, password);
   }
   useEffect(()=>{
+    console.log('running effect');
+  },[isLoggedIn])
+ 
+  useEffect(()=>{
     const userLoggedIn = sessionStorage.getItem('isLoggedIn');
     if(userLoggedIn) {
       setIsLoggedIn(true);

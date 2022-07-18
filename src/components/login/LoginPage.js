@@ -9,6 +9,7 @@ const LoginPage = (props) => {
     username = uname;
   };
   const passwordChangeHandler=(upassword)=>{
+    console.log(upassword);
     password = upassword;
   }
   const loginHandler = (event)=>{

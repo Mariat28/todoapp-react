@@ -3,6 +3,7 @@ const FloatingInput = (props) => {
   const [inputValue, setInputValue] = useState('');
   const InputChangeHandler = (event) => {
       setInputValue(event.target.value);
+      console.log('input', event.target.value);
       props.onInputChange(event.target.value);
   }
 
