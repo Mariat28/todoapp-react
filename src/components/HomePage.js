@@ -2,12 +2,14 @@ import HeaderComponent from "../components/ui/HeaderComponent";
 import TaskList from "../components/tasklist/TaskList";
 import AddTaskModal from "../components/newtask/AddTaskModal";
 import noTasks from "../assets/images/noTasks.svg";
-import { useState } from "react";
+import { useState, useContext } from "react";
+import AuthContext from "../store/auth-context";
 
 const HomePage = (props) =>{
   const [isAddFormOpen, setIsAddFormOpen] = useState(false);
   const [tasks, setTasks] = useState([]);
   const [searchParam, setSearchParam] = useState('');
+  const ctx = useContext(AuthContext);
   const showFormHandler = (value) => {
     setIsAddFormOpen(value);
   };
@@ -26,9 +28,6 @@ const HomePage = (props) =>{
     });
 
   }
-  const logoutClickHandler =()=>{
-    props.onLogout();
-  }
   return(
     <>
       {isAddFormOpen && (
@@ -38,10 +37,10 @@ const HomePage = (props) =>{
       )}
       <div className="text-xl h-full font-bold flex flex-col gap-2 container mx-auto rounded-xl bg-slate-50 shadow-2xl py-3">
         <HeaderComponent onSearchFilter={searchFilterHandler}
-          onAddFormButtonClick={showFormHandler} onLogoutClick={logoutClickHandler}
+          onAddFormButtonClick={showFormHandler}
         ></HeaderComponent>
-        {tasks.length > 0 && <TaskList tasks={tasks} searchParam={searchParam} onDeleteTask={deleteTaskHandler}></TaskList>}
-        {tasks.length === 0 && (
+        {(tasks.length > 0 && ctx.isLoggedIn) && <TaskList tasks={tasks} searchParam={searchParam} onDeleteTask={deleteTaskHandler}></TaskList>}
+        {(tasks.length === 0 && ctx.isLoggedIn) && (
           <div className="w-full h-full  flex flex-col justify-top mt-16 items-center gap-0">
             <div className="h-36 w-52  ">
               <img src={noTasks} alt="no tasks avatar" />

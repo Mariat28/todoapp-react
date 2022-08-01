@@ -1,20 +1,27 @@
+import React, { useState, useContext } from "react";
+import AuthContext from "../../store/auth-context";
 import Logo from "../../assets/images/TaskCalendar.png";
 import AddTasksIcon from "../../assets/images/addTasks.svg";
-
 import FloatingInput from "../ui/FloatingInput";
-import React from "react";
+
 const LoginPage = (props) => {
   let password, username = '';
+  const [uname, setUsername] = useState('');
+  const [upassword, setPassword] = useState('');
+  const authCtx = useContext(AuthContext);
+
   const usernameChangeHandler =(uname)=>{
     username = uname;
+    setUsername(uname);
   };
   const passwordChangeHandler=(upassword)=>{
     console.log(upassword);
+    setPassword(upassword);
     password = upassword;
   }
   const loginHandler = (event)=>{
     event.preventDefault();
-    props.onLogIn(username, password);
+    authCtx.onLogin(username, password);
 
   }
   return (
