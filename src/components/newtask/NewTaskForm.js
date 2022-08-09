@@ -1,5 +1,5 @@
 import ReactDOM from 'react-dom';
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { BsListTask } from "react-icons/bs";
 import { TbFileDescription } from "react-icons/tb";
 
@@ -16,6 +16,14 @@ const NewTaskForm = (props) => {
   const [dateError, setDateError] = useState("");
   const [isValid, setIsValid] = useState(true);
 
+  useEffect(()=>{
+    descriptionInputRef.current = null;
+    titleInputRef.current && titleInputRef.current.focus();
+  },[taskTitle])
+  useEffect(()=>{
+    titleInputRef.current = null;
+    descriptionInputRef.current && descriptionInputRef.current.focus();
+  },[taskDescription])
   const titleChangeHandler = (event) => {
     setTaskTitle(event.target.value);
     setTitleError("");
@@ -37,6 +45,7 @@ const NewTaskForm = (props) => {
     const taskTitle = titleInputRef.current.value;
     const taskDescription = descriptionInputRef.current.value
     const taskDate = dateInputRef.current.value;
+
     if (taskTitle.trim().length === 0) {
       setIsValid(false);
       setTitleError("Task title is required!");
@@ -63,15 +72,9 @@ const NewTaskForm = (props) => {
       props.onAddTask(task);
     }
   };
-  const Backdrop = (props) =>{
-      return (
-        <div className="absolute inset-0 flex justify-center z-10 items-center w-full h-full  bg-black/40">
-        </div>
-      )
-  };
   const ModalOverlay = (props) =>{
     return (
-      <div className="bg-purple-100 z-20 w-1/2 m-auto 2xl:w-2/6 h-96 fixed inset-0 align-middle rounded-md  shadow-lg">
+      <div className="bg-purple-100 z-10 w-1/2 m-auto 2xl:w-2/6 h-96 fixed inset-0 align-middle rounded-md  shadow-lg">
         <div className="rounded-md h-full shadow-lg ">
           <div className="w-full bg-purple-900 h-12 flex items-center justify-between p-2 text-slate-200 font-bold text-base">
             <h2>Add New Task</h2>
@@ -158,10 +161,16 @@ const NewTaskForm = (props) => {
       </div>
     )
   };
+  const Backdrop = (props) =>{
+    return (
+      <div className="absolute inset-0 flex justify-center z-10 items-center w-full h-full  bg-black/40">
+        <ModalOverlay></ModalOverlay>
+      </div>
+    )
+  };
   return (
     <React.Fragment>
-      {ReactDOM.createPortal(<Backdrop/>, document.getElementById('backdrop-root'))}
-      {ReactDOM.createPortal(<ModalOverlay />, document.getElementById('overlay-root'))}
+      <Backdrop></Backdrop>
     </React.Fragment>
 
   );

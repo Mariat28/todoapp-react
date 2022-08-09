@@ -1,4 +1,6 @@
 import NewTaskForm from "./NewTaskForm";
+import ReactDOM from 'react-dom';
+
 const TaskForm = (props) => {
   const closeFormHandler =(value)=>{
     props.onCloseFormClick(value);
@@ -8,11 +10,11 @@ const TaskForm = (props) => {
     props.onSaveTask(task);
     props.onCloseFormClick(false);
   }
-  return(
-    <div className="">
+  return (ReactDOM.createPortal(
+    <>
       <NewTaskForm onCloseButtonClick = {closeFormHandler} onAddTask = {AddTaskHandler}/>
-    </div>
+    </>, document.getElementById('portal')
 
-  )
+  ))
 }
 export default TaskForm;
