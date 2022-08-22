@@ -17,11 +17,11 @@ const NewTaskForm = (props) => {
   const [isValid, setIsValid] = useState(true);
 
   useEffect(()=>{
-    descriptionInputRef.current = null;
+    // descriptionInputRef.current = null;
     titleInputRef.current && titleInputRef.current.focus();
   },[taskTitle])
   useEffect(()=>{
-    titleInputRef.current = null;
+    // titleInputRef.current = null;
     descriptionInputRef.current && descriptionInputRef.current.focus();
   },[taskDescription])
   const titleChangeHandler = (event) => {
